@@ -1,13 +1,9 @@
-name: goTogether CI/CD
+name: mbtiary server
 
 on:
   push:
     branches:
-      - dev # 브랜치 이름
-  pull_request:
-    branches:
-      - dev
-      - main
+      - main # 브랜치 이름
   workflow_dispatch: # 수동 실행
 
 jobs:
@@ -25,20 +21,16 @@ jobs:
       - name: Install Dependencies
         run: npm install # dependency 설치
 
-      - name: Build a Nest Application
-        run: npm run build
-        shell: bash # nestJS application 빌드
-
-      - name: Make a zip file
-        run: zip -r deploy.zip . -x "node_modules/*" "coverage/*" "src/*" "test/*" "README.md" "*.git*"
-        shell: bash
+      # - name: Make a zip file
+      #   run: zip -r deploy.zip . -x "node_modules/*" "coverage/*" "test/*" "README.md" "*.git*"
+      #   shell: bash
 
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
         with:
           format: YYYY-MM-DDTHH-mm-ss
-          utcOffset: '+09:00'
+          utcOffset: "+09:00"
 
       - name: Show Current Time
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" # (2)
@@ -49,8 +41,8 @@ jobs:
       #   with:
       #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
       #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     application_name: goTogether
-      #     environment_name: Gotogether-env-1
+      #     application_name: mbtiary
+      #     environment_name: Mbtiary-env
       #     version_label: github-action-${{steps.current-time.outputs.formattedTime}}
       #     region: ap-northeast-2
       #     deployment_package: deploy.zip
