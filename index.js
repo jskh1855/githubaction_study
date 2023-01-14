@@ -1,0 +1,1 @@
+console.log("github action 스터디")
